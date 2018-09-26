@@ -1,19 +1,49 @@
-const addBtn = document.querySelector('#new-toy-btn')
-const toyForm = document.querySelector('.container')
-let addToy = false
+const URL = 'http://localhost:3000/toys';
 
-// YOUR CODE HERE
+document.addEventListener('DOMContentLoaded', () => {
+  const adapter = new Adapter(URL);
+  const addBtn = document.querySelector('#new-toy-btn');
+  const toyForm = document.querySelector('.container');
+  const form = document.querySelector('.add-toy-form');
 
-addBtn.addEventListener('click', () => {
-  // hide & seek with the form
-  addToy = !addToy
-  if (addToy) {
-    toyForm.style.display = 'block'
-    // submit listener here
-  } else {
-    toyForm.style.display = 'none'
+  loadToys();
+
+  function loadToys() {
+    adapter.getToys()
+    .then(data => {
+      data.forEach(toy => {
+        const getToy = new Toy(toy, adapter);
+        getToy.renderToys();
+      })
+    })
   }
+
+
+  let addToy = false
+  addBtn.addEventListener('click', () => {
+    addToy = !addToy
+    if (addToy) {
+      toyForm.style.display = 'block'
+    } else {
+      toyForm.style.display = 'none'
+    }
+  })
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let name = document.querySelector('.add-toy-form')[0];
+    let image = document.querySelector('.add-toy-form')[1];
+    let data = {};
+    data.name = name.value;
+    data.image = image.value;
+    data.likes = 0;
+    const getToy = new Toy(data);
+    adapter.postToy(data)
+    .then(res => loadToys())
+    name.value = "";
+    image.value = "";
+  })
+
+
+
 })
-
-
-// OR HERE!
