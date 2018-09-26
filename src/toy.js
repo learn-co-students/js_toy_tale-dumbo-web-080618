@@ -11,7 +11,7 @@ class Toy{
     let toyContainer = document.querySelector("#toy-collection")
     // create element
     let toyCard = document.createElement('div')
-    toyCard.class = "card";
+    toyCard.className = "card";
     let info = `
       <h2>${this.name}</h2>
       <img src=${this.image} class="toy-avatar">
