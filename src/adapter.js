@@ -36,7 +36,7 @@ class Adapter {
         Accept: "application/json"
       },
       body: JSON.stringify({"likes": number})
-    })
+    }).then(res => res.json())
   }
 
 }

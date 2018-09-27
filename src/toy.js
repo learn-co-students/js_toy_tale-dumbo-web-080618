@@ -14,7 +14,7 @@ class Toy {
     <img src=${this.image} class="toy-avatar">
     <p>${this.likes} Likes <p>
     <button class="like-btn">Like <3</button>`
-    
+
     const likeBtn = div.querySelector('.like-btn');
     likeBtn.addEventListener('click', () => {
       this.renderLikes();
@@ -29,7 +29,7 @@ class Toy {
   renderLikes() {
     this.likes++;
     this.adapter.likeToy(this.id, this.likes)
-    .then(res => this.toyContainer())
+    // .then(res => this.toyContainer())
   }
 
   renderToys() {

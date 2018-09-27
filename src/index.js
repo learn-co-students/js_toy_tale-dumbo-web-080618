@@ -31,15 +31,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    let name = document.querySelector('.add-toy-form')[0];
-    let image = document.querySelector('.add-toy-form')[1];
-    let data = {};
-    data.name = name.value;
-    data.image = image.value;
-    data.likes = 0;
+    // let name = document.querySelector('.add-toy-form')[0];
+    // let image = document.querySelector('.add-toy-form')[1];
+    let name = e.target.name //get input[0];
+    let image = e.target.image //get input[1];
+    // let data = {};
+    // data.name = name.value;
+    // data.image = image.value;
+    // data.likes = 0;
+    let data = {
+      "name": name.value,
+      "image": image.value,
+      "likes": 0
+    }
     const getToy = new Toy(data);
     adapter.postToy(data)
-    .then(res => loadToys())
+    .then(res => loadToys()) //or window.location.reload();
     name.value = "";
     image.value = "";
   })
